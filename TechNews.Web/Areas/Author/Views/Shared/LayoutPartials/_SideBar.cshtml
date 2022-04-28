@@ -1,0 +1,145 @@
+﻿@using System.Security.Claims
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/Author/Home/Index" class="brand-link">
+      <img src="/img/LOGO.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">پنل نویسنده</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar" style="direction: ltr">
+      <div style="direction: rtl">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <!--FIX USER IMAGE AFTER GETTING IT-->
+                <img src="/img/users/@User.FindFirstValue("ProfilePhoto")" class="img-circle elevation-2" alt="تصویر کاربر">
+            </div>
+          <div class="info">
+              <a class="d-block">
+                  @User.FindFirstValue(ClaimTypes.Name).ToString()
+              </a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link active">
+                    <i class="nav-icon fa fa-dashboard"></i>
+                    <p>
+                        داشبورد
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Author/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>پنل نویسنده</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>صفحه اصلی</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!--Second tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-bars"></i>
+                    <p>
+                        پست ها
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Author/Post" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نمایش پست های شما</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Author/Post/Create" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایجاد پست جدید</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Second tree-->
+
+            <!--Third tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-comment-o"></i>
+                    <p>
+                        نظرات
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Author/Review/AllReviewsIndex" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>تمامی نظرات</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Author/Post/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نظرات به تفکیک پست</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Author/UnconfirmedReviews" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نظرات تایید نشده</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Third tree-->
+            
+          <!--Fourth tree-->
+          <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>
+                      حساب کاربری
+                      <i class="right fa fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a asp-action="GetAccountDetails" asp-controller="Account" asp-route-userId="@(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString())" class="nav-link active">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>اطلاعات حساب کاربری</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/Signout" class="nav-link active">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>خروج</p>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!--End Fourth tree-->
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+    </div>
+    <!-- /.sidebar -->
+  </aside>

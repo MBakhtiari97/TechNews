@@ -1,0 +1,25 @@
+﻿@model TechNews.DataLayer.Entities.Newsletter
+
+@{
+    ViewData["Title"] = "حذف کاربر";
+}
+
+<h1>حذف کاربر</h1>
+
+<h3>از حذف این کاربر از سرویس خبرنامه اطمینان دارید ؟</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+        <a asp-action="Index">بازگشت به لیست</a>
+    </form>
+</div>

@@ -1,0 +1,114 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.Ticket>
+
+@{
+    ViewData["Title"] = "پشتیبانی";
+}
+
+<h1>تیکت های پشتیبانی</h1>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserIpAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketSubmitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAnswered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnswerSubmitDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketTitle)
+            </td>
+            <td>
+                <span>@item.TicketSubmitDate.ToShamsiDate()</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAnswered)
+            </td>
+            <td>
+                @if (item.AnswerSubmitDate != null)
+                {
+                    <span>@item.AnswerSubmitDate.Value.ToShamsiDate()</span>    
+                }
+            </td>
+            <td>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.TicketId">تغییر وضعیت تیکت</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.TicketId">جزئیات</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.TicketId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<div class="col-md-12 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
+<!--Paging-->
+<form asp-action="Index" asp-controller="Ticket" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

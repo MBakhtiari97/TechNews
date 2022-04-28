@@ -1,0 +1,47 @@
+﻿@model TechNews.DataLayer.Entities.Slider
+
+@{
+    ViewData["Title"] = "اسلاید جدید";
+}
+
+<h1>اسلاید جدید</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SlideBanner" class="control-label"></label>
+                <input type="file" asp-for="SlideBanner" class="form-control" />
+                <span asp-validation-for="SlideBanner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlideAlt" class="control-label"></label>
+                <input asp-for="SlideAlt" class="form-control" />
+                <span asp-validation-for="SlideAlt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemRefersTo" class="control-label"></label>
+                <input asp-for="ItemRefersTo" class="form-control" />
+                <span asp-validation-for="ItemRefersTo" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ثبت اسلاید" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,66 @@
+﻿@using TechNews.DataLayer.Entities
+@using TechNews.DataLayer.Context
+@model TechNews.DataLayer.Entities.Item
+@inject TechNewsContext _context;
+@{
+    ViewData["Title"] = "پست جدید";
+}
+
+<h1>پست جدید</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemTitle" class="control-label"></label>
+                <input asp-for="ItemTitle" class="form-control" />
+                <span asp-validation-for="ItemTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <textarea asp-for="ShortDescription" class="form-control" ></textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemDescription" class="control-label"></label>
+                <textarea asp-for="ItemDescription" class="form-control" ></textarea>
+                <span asp-validation-for="ItemDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemAuthor" class="control-label"></label>
+                <input asp-for="ItemAuthor" class="form-control" />
+                <span asp-validation-for="ItemAuthor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemImage" class="control-label"></label>
+                <input type="file" asp-for="ItemImage" class="form-control" />
+                <span asp-validation-for="ItemImage" class="text-danger"></span>
+            </div>
+
+            <label>دسته بندی ها:</label><br />
+            <div class="dropdown">
+                @foreach (var category in _context.Categories.ToList())
+                {
+                    <a class="dropbtn"> <input type="checkbox" name="SelectedGroups" value="@category.CategoryId" /><span>&nbsp;@category.CategoryTitle</span></a>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="افزودن" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="/admin-resources/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('ItemDescription');
+        </script>
+}
+}

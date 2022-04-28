@@ -1,0 +1,103 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.User>
+
+@{
+    ViewData["Title"] = "جستجو بر اساس کاربر";
+}
+
+<h1>نتایج جستجو در کاربران</h1>
+
+<a class="btn btn-outline-secondary btn-return" asp-action="Index" asp-controller="User">بازگشت به لیست کاربران</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IpAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegisterDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <img src="/img/users/@item.ProfilePhoto" alt="تصویر کاربر" class="img-thumbnail profile-user-img"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IpAddress)
+            </td>
+            <td>
+                <span>@item.RegisterDate.ToShamsiDate()</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-controller="User" asp-route-id="@item.UserId">ویرایش</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-controller="User" asp-route-id="@item.UserId">جزئیات</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-controller="User" asp-route-id="@item.UserId">حذف</a>
+                <a class="btn btn-sm btn-outline-dark" asp-action="AddToBlackListUsers" asp-controller="User" asp-route-ipAddress="@item.IpAddress">افزودن به لیست سیاه</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="col-md-12 text-center center-pagination">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+<!--Paging-->
+<form asp-action="SearchInUsers" asp-controller="Search" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo"/>
+    <input type="hidden" value="@ViewBag.PhrasedSearched" name="q"/>
+</form>
+
+
+<!--Change Page Required JS-->
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

@@ -1,0 +1,24 @@
+﻿@using TechNews.Utility.DateConvertor
+@using TechNews.DataLayer.Entities
+@{
+    List<Slider> slides = ViewBag.Slider;
+}
+<div class="main-slider-box">
+    <div class="owl-carousel owl-theme main-slider">
+        @foreach (var slide in slides)
+        {
+            <div class="item">
+                <figure>
+                    <a href="@slide.ItemRefersTo">
+                        <img src="/img/slides/@slide.SlideBanner" alt="@slide.SlideAlt">
+                    </a>
+                    <figcaption class="gradient-fig"></figcaption>
+                    <figcaption class="desc-fig">
+                        <h3>@slide.SlideAlt</h3>
+                        <span><i class="fa fa-clock-o"></i>&nbsp;@slide.SlideSubmitDate.ToShamsiDate()</span>
+                    </figcaption>
+                </figure>
+            </div>
+        }
+    </div>
+</div>

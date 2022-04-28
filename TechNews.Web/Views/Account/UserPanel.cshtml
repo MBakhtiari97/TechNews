@@ -1,0 +1,65 @@
+﻿@using TechNews.Utility.DateConvertor
+@model TechNews.DataLayer.Entities.User
+@{
+    ViewData["Title"] = "حساب کاربری من";
+}
+
+<div class="card col-10 userpanel-style">
+    <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
+        <h2 class="card-title p-3">
+            <i class="fa fa-address-card mr-1"></i>
+            حساب کاربری من
+        </h2>
+
+    </div><!-- /.card-header -->
+    <div class="card-body">
+        <div class="tab-content p-0">
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        نام شما
+                    </th>
+                    <th>
+                        آدرس ایمیل
+                    </th>
+                    <th>
+                        تلفن تماس
+                    </th>
+                    <th>
+                        تاریخ عضویت
+                    </th>
+                    <th>
+                        تصویر
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        @Model.UserName
+                    </td>
+                    <td>
+                        @Model.EmailAddress
+                    </td>
+                    <td>
+                        @Model.PhoneNumber
+                    </td>
+                    <td>
+                        @Model.RegisterDate.ToShamsiDate()
+                    </td>
+                    <td>
+                        <img src="/img/users/@Model.ProfilePhoto" class="img-thumbnail" alt="تصویر کاربر"/>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-info" asp-action="ChangeUserDetails" asp-route-userId="@Model.UserId">ویرایش اطلاعات</a>
+                        <a class="btn btn-sm btn-outline-success" asp-action="ChangePassword">تغییر کلمه عبور</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

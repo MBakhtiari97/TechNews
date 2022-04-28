@@ -1,0 +1,29 @@
+﻿@using TechNews.DataLayer.Entities
+@{
+    List<Item> posts = ViewBag.MostSeenPosts;
+}
+<div class="most-views">
+    <span class="title">پر بازدید ترین های این ماه</span>
+    @foreach (var post in posts)
+    {
+        <div class="col-md-4">
+            <div class="main-post">
+                <a href="/Post/@post.ItemId">
+                    <figure>
+                        <img src="/img/posts/@post.ItemImage" alt="@post.ItemTitle">
+                        <figcaption>
+                            <span><i class="fa fa-folder-o"></i>&nbsp;پربازدید ماه</span>
+                            <h3>@post.ItemTitle</h3>
+                            <span><i class="fa fa-comments-o"></i>&nbsp;@post.Reviews.Count</span>
+                        </figcaption>
+                    </figure>
+                    <div class="p-div">
+                        <p>
+                            @post.ShortDescription
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

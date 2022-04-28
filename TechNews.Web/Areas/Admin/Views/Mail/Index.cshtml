@@ -1,0 +1,77 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.SentEmails>
+
+@{
+    ViewData["Title"] = "ایمیل";
+}
+
+<h1>تاریخچه ایمیل های ارسالی</h1>
+
+<p>
+    <a class="btn create-post" asp-action="CustomEmailSend">ارسال ایمیل شخصی</a>
+    <a class="btn create-post" asp-action="NewsletterEmailSend">ارسال ایمیل خبرنامه</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receiver)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                <span>@item.Date.ToShamsiDate()</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receiver)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EmailId">حذف از تاریخچه ارسال</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<div class="col-md-12 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
+<!--Paging-->
+<form asp-action="Index" asp-controller="Mail" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

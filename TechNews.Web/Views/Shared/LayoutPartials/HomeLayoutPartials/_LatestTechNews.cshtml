@@ -1,0 +1,34 @@
+﻿@using TechNews.DataLayer.Entities
+@using Microsoft.AspNetCore.WebUtilities
+@using TechNews.Utility.DateConvertor
+@{
+    List<Item> posts = ViewBag.LatestTechNews;
+}
+<div class="top-sidebar-r">
+    <span class="title">آخرین اخبار دنیای تکنولوژی</span>
+    @foreach (var post in posts)
+    {
+        <a href="/Post/@post.ItemId">
+            <div class="bx">
+                <div class="col-md-6">
+                    <div class="img-box">
+                        <figure>
+                            <img src="/img/posts/@post.ItemImage" alt="@post.ItemTitle">
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="meta">
+                        <h5>
+                            @post.ItemTitle
+                        </h5>
+                        <span><i class="fa fa-clock-o"></i>&nbsp;@post.ItemSubmitDate.ToShamsiDate()</span>
+                        <div class="text-left">
+                            <sub><i class="fa fa-comment"></i>&nbsp;@post.Reviews.Count</sub>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>  
+    }
+</div>

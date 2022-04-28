@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims
+<div class="container-fluid">
+    <div class="col-md-6">
+        <div class="search-btn">
+            <a href="/">
+                <img src="/img/LOGO.png"/>
+            </a>
+            &nbsp;
+            <span><a href="/Search"><i class="fa fa-search"></i></a></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="top-cat-box">
+            <div class="col-md-12">
+                <div class="menu">
+                    <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li> <img src="/img/users/@User.FindFirstValue("ProfilePhoto")" class="img-thumbnail profile-pic"/> <a>@User.FindFirstValue(ClaimTypes.Name).ToString() عزیز خوش اومدی !</a></li>
+                            <li><a asp-action="UserPanel" asp-controller="Account" asp-route-userId="@int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString())">پنل کاربری</a></li>
+                            <li><a href="/SignOut">خروج</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/SignIn">ورود به حساب کاربری</a></li>
+                            <li><a href="/SignUp">ثبت نام</a></li>
+                        }
+                        @if (User.Identity.IsAuthenticated && int.Parse(User.FindFirstValue("IsAdmin").ToString()) == 2)
+                        {
+                            <li><a href="/Author">پنل نویسنده</a></li>
+                        }
+                        else if (User.Identity.IsAuthenticated && int.Parse(User.FindFirstValue("IsAdmin").ToString()) == 3)
+                        {
+                            <li><a href="/Admin">پنل ادمین</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

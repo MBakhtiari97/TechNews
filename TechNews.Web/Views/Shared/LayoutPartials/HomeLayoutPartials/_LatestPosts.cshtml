@@ -1,0 +1,41 @@
+﻿@using TechNews.DataLayer.Entities
+@using TechNews.Utility.DateConvertor
+@{
+    List<Item> posts = ViewBag.LatestPosts;
+}
+<div class="container-fluid">
+    <div class="blog-title-span">
+        <span class="title">آخرین مطالب</span>
+    </div>
+    @foreach (var post in posts)
+    {
+        <div class="col-md-3">
+            <div class="post-box">
+                <a href="/Post/@post.ItemId">
+                    <figure>
+                        <img src="/img/posts/@post.ItemImage" alt="@post.ItemTitle">
+                        <figcaption class="meta-fig">
+                            <span><i class="fa fa-clock-o"></i>&nbsp;@post.ItemSubmitDate.ToShamsiDate()</span>&nbsp;
+                            <span><i class="fa fa-comment-o"></i>&nbsp;@post.Reviews.Count</span>
+                        </figcaption>
+                        <figcaption class="view">
+                            @foreach (var category in post.SelectedCategory)
+                            {
+                                <a href="/Category/@category.CategoryId"><span>@category.Categories.CategoryTitle</span></a>
+                            }
+                        </figcaption>
+                    </figure>
+                    <div class="text-p">
+                        <h5><strong>@post.ItemTitle</strong></h5>
+                        <p>
+                           @post.ShortDescription
+                        </p>
+                        <div class="text-center"> 
+                            <a href="/Post/@post.ItemId" class="btn btn-default">ادامه مطلب</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

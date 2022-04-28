@@ -1,0 +1,91 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.Slider>
+
+@{
+    ViewData["Title"] = "اسلایدها";
+}
+
+<h1>لیست اسلاید ها</h1>
+
+<p>
+    <a class="btn create-post" asp-action="Create">اسلاید جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SlideBanner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlideAlt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemRefersTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SlideSubmitDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="/img/slides/@item.SlideBanner" class="img-thumbnail img-slider-banner" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SlideAlt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemRefersTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <span>@item.SlideSubmitDate.ToShamsiDate()</span>
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.SlideId">ویرایش</a>&nbsp;|
+                    <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.SlideId">جزئیات</a>&nbsp;|
+                    <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.SlideId">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="col-md-12 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
+<!--Paging-->
+<form asp-action="Index" asp-controller="Slider" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

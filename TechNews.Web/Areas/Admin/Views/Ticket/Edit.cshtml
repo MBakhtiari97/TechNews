@@ -1,0 +1,88 @@
+﻿@using TechNews.Utility.DateConvertor
+@model TechNews.DataLayer.Entities.Ticket
+
+@{
+    ViewData["Title"] = "وضعیت تیکت";
+}
+
+<h1>تغییر وضعیت تیکت</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TicketId" class="form-control" />
+            <input type="hidden" asp-for="TicketSubmitDate" class="form-control"/>
+            <div class="form-group">
+                <label asp-for="UserFullName" class="control-label"></label>
+                <input asp-for="UserFullName" class="form-control" readonly/>
+                <span asp-validation-for="UserFullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserIpAddress" class="control-label"></label>
+                <input asp-for="UserIpAddress" class="form-control" readonly/>
+                <span asp-validation-for="UserIpAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserEmailAddress" class="control-label"></label>
+                <input asp-for="UserEmailAddress" class="form-control" readonly/>
+                <span asp-validation-for="UserEmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserPhoneNumber" class="control-label"></label>
+                <input asp-for="UserPhoneNumber" class="form-control" readonly/>
+                <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketTitle" class="control-label"></label>
+                <input asp-for="TicketTitle" class="form-control" readonly/>
+                <span asp-validation-for="TicketTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketDescription" class="control-label"></label>
+                <input asp-for="TicketDescription" class="form-control" readonly/>
+                <span asp-validation-for="TicketDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketSubmitDate" class="control-label"></label>
+                <input value="@Model.TicketSubmitDate.ToShamsiDate()" class="form-control" readonly>
+                <span asp-validation-for="TicketSubmitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TicketUniqueCode" class="control-label"></label>
+                <input asp-for="TicketUniqueCode" class="form-control" readonly/>
+                <span asp-validation-for="TicketUniqueCode" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAnswered" /> @Html.DisplayNameFor(model => model.IsAnswered)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerDescription" class="control-label"></label>
+                <textarea asp-for="AnswerDescription" class="form-control" ></textarea>
+                <span asp-validation-for="AnswerDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnswerSubmitDate" class="control-label"></label>
+                @if (Model.AnswerSubmitDate != null)
+                {
+                    <input value="@Model.AnswerSubmitDate.Value.ToShamsiDate()" class="form-control" readonly/>
+                    <span asp-validation-for="AnswerSubmitDate" class="text-danger"></span>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ویرایش" class="btn btn-outline-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست تیکت ها</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

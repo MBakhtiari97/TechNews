@@ -1,0 +1,22 @@
+﻿@using TechNews.DataLayer.Entities
+@{
+    List<Review> reviews = ViewBag.MostLikedReviews;
+}
+<div class="top-sidebar-l">
+    <span class="title">پر طرفدار ترین نظرات</span>
+    @foreach (var review in reviews)
+    {
+        <a href="/Post/@review.Items.ItemId">
+            <div class="bx">
+                <div class="col-md-3 nopadding">
+                    <span><i class="fa fa-heart"></i> @review.LikeCount</span>
+                </div>
+                <div class="col-md-8 nopadding">
+                    <h3>
+                       @review.ReviewDescription
+                    </h3>
+                </div>
+            </div>
+        </a>
+    }
+</div>

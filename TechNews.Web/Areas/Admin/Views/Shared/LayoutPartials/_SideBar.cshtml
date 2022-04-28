@@ -1,0 +1,231 @@
+﻿@using System.Security.Claims
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item has-treeview menu-open">
+                <a href="#" class="nav-link active">
+                    <i class="nav-icon fa fa-dashboard"></i>
+                    <p>
+                        داشبورد
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/admin/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>پنل ادمین</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>صفحه اصلی</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!--Second tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-bars"></i>
+                    <p>
+                        پست ها
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Post" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نمایش تمامی پست ها</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Post/Create" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایجاد پست جدید</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Second tree-->
+            <!--Third tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-ellipsis-h"></i>
+                    <p>
+                        دسته بندی ها
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Category" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>تمامی دسته بندی ها</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Category/Create" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایجاد دسته بندی</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Third tree-->
+            
+            <!--Fourth tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-envelope"></i>
+                    <p>
+                        ایمیل ها
+                        <span class="center badge badge-danger">جدید</span>
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Mail" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایمیل های ارسال شده</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/SendEmail" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ارسال ایمیل شخصی</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/SendNewsletter" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ارسال ایمیل خبرنامه</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Fourth tree-->
+
+            <!--Fifth tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-user"></i>
+                    <p>
+                        کاربران
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/User" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>تمامی کاربران</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/User/Create" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایجاد کاربر</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/BlackList" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>لیست سیاه کاربران</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Fifth tree-->
+            
+            <!--Sixth tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-clone"></i>
+                    <p>
+                        اسلایدها
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Slider" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>تمامی اسلایدها</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Slider/Create" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>ایجاد اسلاید</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Sixth tree-->
+            
+            <!--Seventh tree-->
+            <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-comment-o"></i>
+                    <p>
+                        نظرات
+                        <i class="right fa fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/Admin/Review/AllReviewsIndex" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>تمامی نظرات</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/Post/" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نظرات به تفکیک پست</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/UnconfirmedReviews" class="nav-link active">
+                            <i class="fa fa-circle-o nav-icon"></i>
+                            <p>نظرات تایید نشده</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!--End Seventh tree-->
+            
+          <!--Eighth tree-->
+          <li class="nav-item has-treeview ">
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>
+                      حساب کاربری
+                      <i class="right fa fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a asp-action="GetAccountDetails" asp-controller="User" asp-route-userId="@(User.FindFirstValue(ClaimTypes.NameIdentifier).ToString())" class="nav-link active">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>اطلاعات حساب کاربری</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/Signout" class="nav-link active">
+                          <i class="fa fa-circle-o nav-icon"></i>
+                          <p>خروج</p>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!--End Eighth tree-->
+
+          </ul>
+        </nav>

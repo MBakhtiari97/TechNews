@@ -1,8 +1,49 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "خانه";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container-fluid">
+         <div class="row">
+            <div class="col-md-3">
+              <partial name="LayoutPartials/HomeLayoutPartials/_TopSideBarRight"/>
+            </div>
+            <div class="col-md-6">
+              <partial name="LayoutPartials/HomeLayoutPartials/_Slider"/>
+            </div>
+            <div class="col-md-3">
+             <partial name="LayoutPartials/HomeLayoutPartials/_TopSideBarLeft"/>
+            </div>
+         </div>
+      </div>
+      <div class="clear-fix"></div>
+      <div class="main-content">
+         <div class="container-fluid">
+            <div class="row">
+               <div class="col-md-3">
+                  <div class="r-sidebar">
+                    <partial name="LayoutPartials/HomeLayoutPartials/_HotConversation"/>
+                    <partial name="LayoutPartials/HomeLayoutPartials/_LatestTechNews"/>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="content-wrapper">
+                    <partial name="LayoutPartials/HomeLayoutPartials/_MostViews"/>
+                    <partial name="LayoutPartials/HomeLayoutPartials/_SpecialCatBox"/>
+                  </div>
+               </div>
+               <div class="col-md-3">
+                  <div class="l-sidebar">
+                     <partial name="LayoutPartials/HomeLayoutPartials/_LatestJournals"/>
+                  </div>
+                   <div class="l-sidebar">
+                       <partial name="LayoutPartials/HomeLayoutPartials/_SideCategory"/>
+                   </div>
+               </div>
+            </div>
+         </div>
+         <div class="clear-fix"></div>
+         <div class="latest-posts">
+           <partial name="LayoutPartials/HomeLayoutPartials/_LatestPosts"/>
+         </div>
+      </div>
+      <div class="clear-fix"></div>

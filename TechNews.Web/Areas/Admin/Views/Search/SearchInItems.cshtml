@@ -1,0 +1,93 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.Item>
+
+@{
+    ViewData["Title"] = "جستجو بر اساس پست";
+}
+
+<h1>نتایج جستجو</h1>
+
+<a class="btn btn-outline-secondary btn-return" asp-action="Index" asp-controller="Post">بازگشت به لیست پست ها</a>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.ItemTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LikeCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemAuthor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemSubmitDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemTitle)
+            </td>
+            <td>
+                <img src="/img/posts/@item.ItemImage" class="img-thumbnail imgthumbnail"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikeCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemAuthor)
+            </td>
+            <td>
+                <span>@item.ItemSubmitDate.ToShamsiDate()</span>
+            </td>
+            <td>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-controller="Post" asp-route-id="@item.ItemId">ویرایش</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-controller="Post" asp-route-id="@item.ItemId">جزئیات</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Index" asp-controller="Tag" asp-route-itemId="@item.ItemId">تگ ها</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-dark" asp-action="Index" asp-controller="Review" asp-route-itemId="@item.ItemId">نظرات</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-controller="Post" asp-route-id="@item.ItemId">حذف</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div class="col-md-12 text-center center-pagination">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+<!--Paging-->
+<form asp-action="SearchInItems" asp-controller="Search" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo"/>
+    <input type="hidden" value="@ViewBag.PhrasedSearched" name="q"/>
+</form>
+
+
+<!--Change Page Required JS-->
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

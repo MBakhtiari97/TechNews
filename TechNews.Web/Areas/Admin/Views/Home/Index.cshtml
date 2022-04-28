@@ -1,0 +1,244 @@
+﻿@using TechNews.DataLayer.Entities
+@using TechNews.Utility.DateConvertor
+@{
+    ViewData["Title"] = "پنل ادمین";
+    List<Browser> listBrowsers = ViewBag.Browsers;
+    List<Ticket> listTickets = ViewBag.NewTickets;
+    List<User> listUsers = ViewBag.NewUsers;
+}
+
+<h1 class="admin-title">پنل ادمین</h1>
+<!--Status-->
+<div class="row">
+
+    <div class="col-lg-4 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success-gradient">
+            <div class="inner">
+                <h3>@ViewBag.UsersCount</h3>
+                <p>کاربران ثبت شده</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="/Admin/User" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+
+    <div class="col-lg-4 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning-gradient">
+            <div class="inner">
+                <h3>@ViewBag.NewReviews</h3>
+                <p>نظرات در انتظار تایید</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="/Admin/UnconfirmedReviews" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+
+    <div class="col-lg-4 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger-gradient">
+            <div class="inner">
+                <h3>@ViewBag.NewTicketsCount</h3>
+
+                <p>تیکت های در انتظار پاسخ</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="/Admin/Ticket" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+
+<!--User Browser Details-->
+<div class="card col-12">
+    <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title p-3">
+            <i class="fa fa-feed mr-1"></i>
+            اطلاعات مرورگر های مورد استفاده
+        </h3>
+
+    </div><!-- /.card-header -->
+    <div class="card-body">
+        <div class="tab-content p-0">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            مرورگر و سیستم عامل مورد استفاده
+                        </th>
+                        <th>
+                            تعداد کاربران
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in listBrowsers)
+                    {
+                        <tr>
+                            <td>
+                                @item.BrowserName
+                            </td>
+                            <td>
+                                @item.UsedCount
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--New Tickets-->
+<div class="card col-12">
+    <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title p-3">
+            <i class="fa fa-ticket mr-1"></i>
+            تیکت های جدید
+        </h3>
+
+    </div><!-- /.card-header -->
+    <div class="card-body">
+        <div class="tab-content p-0">
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        ارسال کننده تیکت
+                    </th>
+                    <th>
+                        آدرس ایمیل
+                    </th>
+                    <th>
+                        آدرس آیپی
+                    </th>
+                    <th>
+                        عنوان تیکت
+                    </th>
+                    <th>
+                        تاریخ ارسال تیکت
+                    </th>
+                    <th>
+                       
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in listTickets)
+                {
+                    <tr>
+                        <td>
+                            @item.UserFullName
+                        </td>
+                        <td>
+                            @item.UserEmailAddress
+                        </td>
+                        <td>
+                            @item.UserIpAddress
+                        </td>
+                        <td>
+                            @item.TicketTitle
+                        </td>
+                        <td>
+                            @item.TicketSubmitDate.ToShamsiDate()
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-success btn-admin-index" asp-action="Details" asp-controller="Ticket" asp-route-id="@item.TicketId">پاسخ</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--New Users-->
+<div class="card col-12">
+    <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title p-3">
+            <i class="fa fa-user-plus mr-1"></i>
+            کاربران جدید
+        </h3>
+
+    </div><!-- /.card-header -->
+    <div class="card-body">
+        <div class="tab-content p-0">
+            
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        نام کاربر
+                    </th>
+                    <th>
+                        آدرس ایمیل
+                    </th>
+                    <th>
+                        آدرس آیپی
+                    </th>
+                    <th>
+                        شماره تماس
+                    </th>
+                    <th>
+                        تاریخ ثبت نام
+                    </th>
+                    <th>
+                        وضعیت فعالسازی حساب کاربری
+                    </th>
+                    <th>
+                       
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in listUsers)
+                {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.EmailAddress
+                        </td>
+                        <td>
+                            @item.IpAddress
+                        </td>
+                        <td>
+                            @item.PhoneNumber
+                        </td>
+                        <td>
+                            @item.RegisterDate.ToShamsiDate()
+                        </td>            
+                        <td>
+                            @if(item.IsActive)
+                            {
+                            <span>فعال</span>
+                            }
+                            else
+                            {
+                            <span>غیر فعال</span>
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-success btn-admin-index" asp-action="Details" asp-controller="User" asp-route-id="@item.UserId">جزئیات بیشتر</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

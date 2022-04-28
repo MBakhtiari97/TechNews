@@ -1,0 +1,59 @@
+﻿
+@using TechNews.Utility.DateConvertor
+@{
+    Layout = "_MainLayout";
+    @model TechNews.DataLayer.Entities.Item
+
+}
+@{
+    ViewData["Title"] = $"{Model.ItemTitle}";
+}
+
+<div class="single_post">
+    <div class="container-fluid">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="post_img">
+                        <img src="/img/posts/@Model.ItemImage" alt="@Model.ItemTitle">
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="posts_meta text-center">
+                <a onclick="RedirectToComments()"><span><i class="fa fa-comment-o"></i>&nbsp;@Model.Reviews.Count نظر</span></a>
+                @foreach (var category in Model.SelectedCategory)
+                {
+                    <a href="/Category/@category.CategoryId"><span><i class="fa fa-bookmark"></i>&nbsp;@category.Categories.CategoryTitle</span></a>
+                }
+                <a><span><i class="fa fa-calendar"></i>&nbsp;@Model.ItemSubmitDate.ToShamsiDate()</span></a>
+                <a asp-action="LikePost" asp-controller="Post" asp-route-itemId="@Model.ItemId"><span><i class="fa fa-heart"></i>&nbsp;@Model.LikeCount</span></a>
+            </div>
+            
+            <div class="post_content">
+                <h4>@Model.ItemTitle</h4>
+                <p>@Html.Raw(@Model.ItemDescription)</p>
+                <p>کلمات کلیدی :</p>
+                @foreach (var tag in Model.Tags)
+                {
+                    <a class="btn btn-default" asp-action="TagPage" asp-controller="Search" asp-route-tagPhrase="@tag.TagTitle">@tag.TagTitle</a>
+                }
+                
+            </div>
+            <div id="redirect-comments">
+                @await Component.InvokeAsync("Review",Model.ItemId)
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+    function RedirectToComments()
+    {
+        document
+            .getElementById("redirect-comments")
+            .scrollIntoView({ behavior: "smooth" });
+    }
+</script>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<TechNews.DataLayer.Entities.Tag>
+
+@{
+    ViewData["Title"] = "تگ ها";
+}
+
+<h1>تگ های پست (@ViewBag.itemTitle)</h1>
+
+<p>
+    <a class="btn create-post" asp-action="Create" asp-route-itemId="@ViewBag.itemId">تگ جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TagTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TagTitle)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.TagId" class="btn btn-sm btn-outline-danger">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

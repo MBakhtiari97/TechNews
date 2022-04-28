@@ -1,0 +1,32 @@
+﻿@model TechNews.DataLayer.Entities.Category
+
+@{
+    ViewData["Title"] = "ویرایش";
+}
+
+<h1>ویرایش دسته بندی</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoryId" class="form-control" />
+            <div class="form-group">
+                <label asp-for="CategoryTitle" class="control-label"></label>
+                <input asp-for="CategoryTitle" class="form-control" />
+                <span asp-validation-for="CategoryTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ذخیره تغییرات" class="btn btn-outline-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

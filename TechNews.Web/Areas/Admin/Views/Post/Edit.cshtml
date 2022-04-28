@@ -1,0 +1,76 @@
+﻿@using TechNews.DataLayer.Context
+@using TechNews.DataLayer.Entities
+@model TechNews.DataLayer.Entities.Item
+@inject TechNewsContext _context;
+@{
+    ViewData["Title"] = "ویرایش";
+    List<int> selectedCategories = ViewBag.SelectedCategories;
+}
+
+<h1>ویرایش پست</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ItemId"/>
+            <input type="hidden" asp-for="ItemSubmitDate"/>
+            <div class="form-group">
+                <label asp-for="ItemTitle" class="control-label"></label>
+                <input asp-for="ItemTitle" class="form-control" />
+                <span asp-validation-for="ItemTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortDescription" class="control-label"></label>
+                <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemDescription" class="control-label"></label>
+                <textarea asp-for="ItemDescription" class="form-control"></textarea>
+                <span asp-validation-for="ItemDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemImage" class="control-label"></label>
+                <input asp-for="ItemImage" type="file" class="form-control" />
+                <span asp-validation-for="ItemImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LikeCount" class="control-label"></label>
+                <input asp-for="LikeCount" class="form-control" />
+                <span asp-validation-for="LikeCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemAuthor" class="control-label"></label>
+                <input asp-for="ItemAuthor" class="form-control" />
+                <span asp-validation-for="ItemAuthor" class="text-danger"></span>
+            </div>
+            <label>دسته بندی ها</label><br/>
+            @foreach (var category in _context.Categories.ToList())
+            {
+                <div class="dropdown">
+                    <a class="dropbtn"> <input type="checkbox" name="SelectedGroups" value="@category.CategoryId" @((selectedCategories.Any(c=>c==category.CategoryId)?"checked":""))/><span>&nbsp;@category.CategoryTitle</span></a>
+                </div>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="ذخیره" class="btn btn-outline-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به صفحه اصلی</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="/admin-resources/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('ItemDescription');
+        </script>
+    }
+}

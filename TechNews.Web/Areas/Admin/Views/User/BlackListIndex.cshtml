@@ -1,0 +1,36 @@
+﻿@model IEnumerable<TechNews.DataLayer.Entities.BlackList>
+
+@{
+    ViewData["Title"] = "لیست سیاه";
+}
+
+<h1>لیست سیاه کاربران</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackListId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlackListIpAddress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackListId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BlackListIpAddress)
+            </td>
+            <td>
+                <a class="btn btn-outline-danger" asp-action="RemoveFromBlackList" asp-route-id="@item.BlackListId">حذف از لیست سیاه</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

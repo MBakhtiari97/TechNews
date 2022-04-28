@@ -1,0 +1,78 @@
+﻿
+@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.Core.DTOs.ShowItemsInCategory>
+<div class="latest-posts">
+    <div class="container-fluid">
+        <div class="col-md-9">
+            <div class="blog-title-span">
+                <span class="title">@ViewBag.CategoryTitle</span>
+            </div>
+            @if (Model.Any())
+            {
+                @foreach (var post in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="post-box">
+                            <a href="/Post/@post.ItemId">
+                                <figure>
+                                    <img src="/img/posts/@post.ImageTitle" alt="@post.ItemTitle">
+                                    <figcaption class="meta-fig">
+                                        <span><i class="fa fa-clock-o"></i>&nbsp;@post.PublishDate.ToShamsiDate()</span>&nbsp;
+                                        <span><i class="fa fa-comment-o"></i>&nbsp;@post.ReviewsCount</span>
+                                    </figcaption>
+                                </figure>
+                            </a><div class="text-p">
+                                <a href="#">
+                                    <h5 class="text-center"><strong>@post.ItemTitle</strong></h5>
+                                    <p>
+                                        @post.ShortDescription
+                                    </p>
+                                </a><div class="text-center">
+                                    <a class="btn btn-default" href="/Post/@post.ItemId">ادامه مطلب</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="notfounditem">موردی در این دسته بندی یافت نشد !</p>
+            }
+           
+        </div>
+        <div class="col-md-3 main-content">
+            <div class="l-sidebar">
+                <partial name="LayoutPartials/HomeLayoutPartials/_SideCategory" model="@ViewBag.AltCategories"/>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if (ViewBag.PageCount > 1)
+                    {
+                        @for (var i = 1; i <= ViewBag.PageCount; i++)
+                        {
+                            <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!--Paging-->
+<form asp-action="ShowPostByCategory" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

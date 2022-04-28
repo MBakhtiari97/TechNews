@@ -1,0 +1,79 @@
+﻿@using TechNews.Utility.DateConvertor
+@model TechNews.DataLayer.Entities.Review
+
+@{
+    ViewData["Title"] = "تغییر وضعیت";
+}
+
+<h1>تغییر وضعیت نظر</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input asp-for="ReviewId" type="hidden" class="form-control" />
+            <input asp-for="ParentId" type="hidden" class="form-control" />
+            <input asp-for="ItemId" type="hidden" class="form-control" />
+            <input asp-for="ReviewDate" type="hidden" class="form-control" />
+
+            <div class="form-group">
+                <label asp-for="UserIpAddress" class="control-label"></label>
+                <input asp-for="UserIpAddress" class="form-control" readonly/>
+                <span asp-validation-for="UserIpAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewTitle" class="control-label"></label>
+                <input asp-for="ReviewTitle" class="form-control" readonly/>
+                <span asp-validation-for="ReviewTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewDescription" class="control-label"></label>
+                <input asp-for="ReviewDescription" class="form-control" readonly/>
+                <span asp-validation-for="ReviewDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReviewDate" class="control-label"></label>
+                <input value="@Model.ReviewDate.ToShamsiDate()" class="form-control" readonly>
+                <span asp-validation-for="ReviewDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPublished" /> @Html.DisplayNameFor(model => model.IsPublished)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="LikeCount" class="control-label"></label>
+                <input asp-for="LikeCount" class="form-control" />
+                <span asp-validation-for="LikeCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DislikeCount" class="control-label"></label>
+                <input asp-for="DislikeCount" class="form-control" />
+                <span asp-validation-for="DislikeCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control" readonly/>
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" readonly/>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ذخیره تغییرات" class="btn btn-outline-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-itemId="@Model.ItemId">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

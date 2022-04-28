@@ -1,0 +1,55 @@
+﻿@using TechNews.Utility.DateConvertor
+@model TechNews.DataLayer.Entities.Item
+
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<h1>جزئیات</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ItemTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemImage)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="/img/posts/@Model.ItemImage" class="img-thumbnail imgthumbnail"/>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LikeCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LikeCount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemAuthor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ItemAuthor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemSubmitDate)
+        </dt>
+        <dd class = "col-sm-10">
+            <span>@Model.ItemSubmitDate.ToShamsiDate()</span>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.ItemId">ویرایش</a>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>

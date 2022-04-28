@@ -1,0 +1,29 @@
+﻿@using TechNews.DataLayer.Entities
+@{
+    List<Item> posts = ViewBag.Recommended;
+}
+<div class="special-cat-box">
+    <span class="title">پیشنهادی ها</span>
+    <div class="col-md-12">
+        <div class="left-content">
+            @foreach (var post in posts)
+            {
+                <div class="col-md-4">
+                    <a href="/Post/@post.ItemId">
+                        <div class="content">
+                            <figure>
+                                <img src="/img/posts/@post.ItemImage" alt="@post.ItemTitle">
+                                <figcaption><i class="fa fa-external-link"></i></figcaption>
+                            </figure>
+                            @foreach (var category in post.SelectedCategory)
+                            {
+                                <a href="/Category/@category.CategoryId"><span>@category.Categories.CategoryTitle</span></a>
+                            }
+                            <h5>@post.ItemTitle</h5>
+                        </div>
+                    </a>
+                </div> 
+            }
+        </div>
+    </div>
+</div>

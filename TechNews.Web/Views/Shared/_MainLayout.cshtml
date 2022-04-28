@@ -1,0 +1,27 @@
+﻿@using TechNews.Web.ViewComponents
+@using Microsoft.AspNetCore.Mvc.Rendering
+<html>
+<head>
+    <partial name="LayoutPartials/_Sources"/>
+</head>
+<body>
+    <div class="top-bar">
+      <partial name="LayoutPartials/_TopBar"/>
+    </div>
+    <div class="main-header">
+        @await Component.InvokeAsync("Categories")
+    </div>
+    <div class="clear-fix"></div>
+    @RenderBody()
+    <div class="footer">
+       <partial name="LayoutPartials/_Footer"/>
+    </div>
+    <div class="end-wrapper">
+       <partial name="LayoutPartials/_CopyRights"/>
+    </div>
+    <div class="bg"></div>
+    <partial name="LayoutPartials/_Scripts"/>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

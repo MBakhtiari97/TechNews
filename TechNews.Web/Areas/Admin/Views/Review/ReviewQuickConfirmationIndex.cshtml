@@ -1,0 +1,63 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.Review>
+
+@{
+    ViewData["Title"] = "نظرات";
+}
+
+<h1>نظرات در انتظار تایید</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserIpAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDescription)
+            </td>
+            <td>
+                <span>@item.ReviewDate.ToShamsiDate()</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                <a class="btn btn-outline-success" asp-action="ReviewQuickConfirmation" asp-route-reviewId="@item.ReviewId">تایید نظر</a>
+                <a class="btn btn-outline-danger" asp-action="QuickDeleteReview" asp-route-reviewId="@item.ReviewId">حذف نظر</a>
+                <a class="btn btn-outline-dark" asp-action="AddToBlackListUsers" asp-controller="User" asp-route-ipAddress="@item.UserIpAddress">افزودن به لیست سیاه</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

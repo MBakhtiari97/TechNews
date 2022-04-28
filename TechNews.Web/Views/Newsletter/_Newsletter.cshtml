@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "خبرنامه";
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
+    <link href="/searchsources/css/main.css" rel="stylesheet" />
+</head>
+<body>
+<div class="s130">
+    <form asp-action="JoinToNewsletter" asp-controller="Newsletter">
+        <p>عضویت و یا لغو عضویت خبرنامه</p>
+        <div class="inner-form">
+            <div class="input-field first-wrap">
+                <div class="svg-wrapper">
+                </div>
+                <input id="search" name="emailAddress" type="text" placeholder="آدرس ایمیل خود را وارد کنید" required/>
+            </div>
+            <div class="input-field second-wrap">
+                <button class="btn-search" type="submit">عضویت / لغو عضویت</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="/searchsources/js/extention/choices.js"></script>
+</body>
+</html>

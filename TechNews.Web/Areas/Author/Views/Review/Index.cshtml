@@ -1,0 +1,106 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.DataLayer.Entities.Review>
+
+@{
+    ViewData["Title"] = "نظرات";
+}
+
+<h1>نظرات پست (@ViewBag.ItemTitle)</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserIpAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPublished)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LikeCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DislikeCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIpAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewTitle)
+            </td>
+            <td>
+                <span>@item.ReviewDate.ToShamsiDate()</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LikeCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DislikeCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-success">جزئیات نظر</a>
+                <a asp-action="Create" asp-route-itemId="@item.ItemId" asp-route-parentId="@item.ReviewId" class="btn btn-sm btn-outline-info">افزودن پاسخ</a>
+                <a asp-action="Edit" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-secondary">تغییر وضعیت</a>
+                <a asp-action="Delete" asp-route-id="@item.ReviewId" class="btn btn-sm btn-outline-danger">حذف نظر</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="col-md-12 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
+<!--Paging-->
+<form asp-action="Index" asp-controller="Review" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

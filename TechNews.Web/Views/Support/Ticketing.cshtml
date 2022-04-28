@@ -1,0 +1,56 @@
+﻿@model TechNews.Core.DTOs.TicketViewModel
+
+@{
+    ViewData["Title"] = "فرم تماس با ما";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        تماس با ما
+    </title>
+    <link type="text/css" href="/contactus-resources/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <form id="contact" asp-action="Ticketing" asp-controller="Support" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h3>ثبت تیکت جدید</h3>
+            <div class="form-group">
+                <input asp-for="UserFullName" placeholder="نام شما" type="text" tabindex="1" autofocus>
+                <span asp-validation-for="UserFullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="UserEmailAddress" placeholder="پست الکترونیک" type="email" tabindex="2">
+                <span asp-validation-for="UserEmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="UserPhoneNumber" placeholder="تلفن همراه" type="tel" tabindex="3">
+                <span asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="TicketTitle" placeholder="موضوع" tabindex="4">
+                <span asp-validation-for="TicketTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <textarea asp-for="TicketDescription" placeholder="پیام خود را بنویسید" tabindex="5"></textarea>
+                <span asp-validation-for="TicketDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button name="submit" type="submit" id="contact-submit" data-submit="...ارسال">ارسال تیکت</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -1,0 +1,16 @@
+﻿@using System.Collections
+@using TechNews.Core.DTOs
+@{
+    IEnumerable<ShowSideCategoryViewModel> categories = ViewBag.AltCategories;
+}
+<div class="cat-sidebar">
+    <span class="title">دسته بندی مطالب</span>
+    <div class="text-left"><i class="fa fa-folder-o"></i></div>
+    <ul>
+        @foreach (var category in categories)
+        {
+            <li><a href="/Category/@category.CategoryId">@category.CategoryTitle</a><span>@category.CategoryCount</span></li> 
+        }
+        
+    </ul>
+</div>

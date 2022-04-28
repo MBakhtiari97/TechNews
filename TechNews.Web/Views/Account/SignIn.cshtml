@@ -1,0 +1,49 @@
+﻿@model TechNews.Core.DTOs.LoginViewModel
+
+@{
+    ViewData["Title"] = "ورود به حساب";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-danger cannot-access">شما قبلا در سیستم وارد شده اید و یا مجوز دسترسی به بخش درخواست شده را ندارید !</div>
+}
+else
+{
+    <div class="register-main">
+        <div class="row register">
+            <h1>ورود به حساب کاربری</h1>
+            <hr />
+            <img src="/img/login.png"/>
+            <div class="col-md-12">
+                <form asp-action="SignIn">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" class="form-control"/>
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control"/>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="RememberMe"/> @Html.DisplayNameFor(model => model.RememberMe)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">ورود</button>
+                    </div>
+                </form>
+                <a class="btn btn-default" href="/ForgotPassword">رمز عبور خود را فراموش کرده ام !</a>
+                <p><a class="btn btn-default" href="/SignUp">حساب کاربری ندارید ؟ یک حساب ایجاد کنید !</a></p>
+            </div>
+        </div>
+    </div> 
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

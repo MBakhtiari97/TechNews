@@ -1,0 +1,39 @@
+﻿@model TechNews.Web.Areas.Admin.Models.ViewModels.NewsletterEmailViewModel
+
+@{
+    ViewData["Title"] = "خبرنامه";
+}
+
+<h1>ارسال ایمیل خبرنامه</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="NewsletterMail" asp-controller="Mail">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmailTitle" class="control-label"></label>
+                <input asp-for="EmailTitle" class="form-control" />
+                <span asp-validation-for="EmailTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailDescription" class="control-label"></label>
+                <textarea asp-for="EmailDescription" class="form-control"></textarea>
+                <span asp-validation-for="EmailDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ارسال" class="btn btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script src="/admin-resources/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('EmailDescription');
+        </script>
+    }
+}

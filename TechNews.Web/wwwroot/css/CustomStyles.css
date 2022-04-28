@@ -1,0 +1,178 @@
+﻿.register {
+    text-align: center;
+    margin: 0px 400px 30px 400px;
+}
+
+.register-main {
+    background-color: whitesmoke;
+}
+.register-main a {
+    margin-bottom: 10px;
+}
+.comments_form h3 h5 {
+    margin-right: 15px;
+}
+
+.show-comment {
+    border: 3px solid #E9EAED;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.show-comment-inside {
+    margin: 25px;
+}
+
+.btnlike {
+    color: #008000;
+}
+
+.btndislike {
+    color: #E72C56;
+}
+
+.btnreport {
+    color: #4188FF;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: #4188FF 0 0 0 0;
+    }
+
+    80% {
+        box-shadow: rgba(65, 136, 255,000) 0 0 0 5px;
+    }
+}
+
+.no-comment {
+    text-align: center
+}
+
+.show-comment-inside span {
+    font-size: 12px;
+}
+
+.register-main img {
+    width: 100px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    transition: transform .7s ease-in-out;
+}
+
+    .register-main img:hover {
+        transform: rotate(360deg);
+    }
+
+.register-main a, button {
+    background-color: #EF7C00;
+    border: 0;
+    color: #e9eaed
+}
+
+.register-main input {
+    text-align: center
+}
+
+.single_post img {
+    animation: shadow 2s infinite;
+}
+
+@keyframes shadow {
+    0% {
+        box-shadow: #EF7C00 0 0 0 0;
+    }
+
+    80% {
+        box-shadow: rgba(44, 44, 47,000) 0 0 0 5px;
+    }
+}
+
+.search-btn img {
+    width: 100px;
+    border-radius: 5%;
+}
+
+.notfounditem {
+    text-align: center;
+    color: #ef7c00;
+}
+
+.backtomainpage {
+    background-color: #EF7C00;
+    border: 0;
+    color: #e9eaed
+}
+
+.help {
+    text-align: center;
+    color: #e9eaed;
+}
+
+.hide-answer-btn {
+    color: #4188FF;
+    cursor: pointer;
+}
+
+.show-answer-btn {
+    color: #E72C56;
+    cursor: pointer;
+}
+
+.forget-password {
+    text-align: center;
+    padding: 50px 400px;
+}
+.forget-password input {
+    margin-top: 20px;
+    text-align: center;
+}
+.forget-password button {
+    background-color: #ef7c00;
+    color: #e9eaed;
+}
+.forget-password button:hover {
+    background-color: #4188ff;
+    color: #e9eaed;
+}
+.success-recover {
+    text-align: center;
+}
+
+.success-recover b {
+    font-size: 20px;
+}
+.success-recover a {
+    background-color: #ef7c00;
+    color: #e9eaed;
+}
+.cannot-access {
+    text-align: center;
+    margin: 50px 400px;
+}
+.userpanel-style table {
+    font-weight: bold !important;
+    font-size: 24px !important;
+    text-align: center !important;
+}
+.userpanel-style {
+    margin: 50px;
+}
+.userpanel-style h2 {
+    text-align: center;
+    margin-bottom: 30px; 
+}
+.userpanel-style img {
+    max-width: 150px;
+    border-radius: 50%;
+}
+.userpanel-style a {
+    background-color: #ef7c00;
+    color: #e9eaed;
+}
+
+.profile-pic {
+    max-width: 50px;
+    border-radius: 50%;
+}

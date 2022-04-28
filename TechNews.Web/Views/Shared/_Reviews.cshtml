@@ -1,0 +1,85 @@
+﻿@using TechNews.Utility.DateConvertor
+@using TechNews.Core.DTOs
+@model IEnumerable<TechNews.Core.DTOs.ReviewViewModel>
+<div class="comments_form">
+    <h3>دیدگاه ها </h3>
+    @if (Model.Any())
+    {
+        @foreach (var review in Model.Where(r => r.ParentId == null))
+        {
+
+            <div class="show-comment">
+                <div class="show-comment-inside">
+                    <p><i class="fa fa-user">&nbsp; <b>@review.Username :</b><span>(@review.ReviewDate.ToShamsiDate())</span></i></p>
+                    <span class="pull-left"><a class="btn btn-default" onclick="ReplyComment(@review.ReviewId)"><i class="fa fa-reply"></i>&nbsp;پاسخ</a></span>
+                    <h4><b>@review.Title</b></h4>
+                    <p>@review.Description</p>
+
+                    <a class="btn btn-default btnlike" asp-action="LikeComment" asp-controller="Review" asp-route-postId="@review.ItemId" asp-route-reviewId="@review.ReviewId"><i class="fa fa-thumbs-up"></i>&nbsp;@review.LikeCount</a>
+                    <a class="btn btn-default btndislike" asp-action="DislikeComment" asp-controller="Review" asp-route-postId="@review.ItemId" asp-route-reviewId="@review.ReviewId"><i class="fa fa-thumbs-down"></i>&nbsp;@review.DislikeCount</a>
+                    <a class="btn btn-default pull-left btnreport" asp-action="ReportReview" asp-controller="Review" asp-route-postId="@review.ItemId" asp-route-reviewId="@review.ReviewId"><i class="fa fa-lightbulb-o"></i>&nbsp;گزارش</a>
+
+
+                    @if (Model.Any(r => r.ParentId == review.ReviewId))
+                    {
+                        @*<a class="collapse-answer-btn" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"><i class="fa fa-arrow-down"></i>&nbsp;مشاهده پاسخ ها</a>
+                        *@ <a class="show-answer-btn" onclick="ShowAnswers(@review.ReviewId)"><b><i class="fa fa-arrow-down"></i>&nbsp;نمایش پاسخ ها</b></a>
+
+                        <hr />
+                        <div class="collapse multi-collapse" id="collapseComments-@review.ReviewId">
+                            @foreach (var subReview in Model.Where(r => r.ParentId == review.ReviewId))
+                            {
+                                <div class="show-comment-inside">
+                                    <p><i class="fa fa-user">&nbsp; <b>@subReview.Username در پاسخ گفته :</b><span>(@subReview.ReviewDate.ToShamsiDate())</span></i></p>
+                                    <h4><b>@subReview.Title</b></h4>
+                                    <p>@subReview.Description</p>
+
+                                    <a class="btn btn-default btnlike" asp-action="LikeComment" asp-controller="Review" asp-route-postId="@subReview.ItemId" asp-route-reviewId="@subReview.ReviewId"><i class="fa fa-thumbs-up"></i>&nbsp;@subReview.LikeCount</a>
+                                    <a class="btn btn-default btndislike" asp-action="DislikeComment" asp-controller="Review" asp-route-postId="@subReview.ItemId" asp-route-reviewId="@subReview.ReviewId"><i class="fa fa-thumbs-down"></i>&nbsp;@subReview.DislikeCount</a>
+                                    <a class="btn btn-default pull-left btnreport" asp-action="ReportReview" asp-controller="Review" asp-route-postId="@subReview.ItemId" asp-route-reviewId="@subReview.ReviewId"><i class="fa fa-lightbulb-o"></i>&nbsp;گزارش</a>
+                                </div>
+                            }
+                            <a class="hide-answer-btn" onclick="HideAnswers(@review.ReviewId)"><b><i class="fa fa-arrow-up"></i>&nbsp;پنهان کردن پاسخ ها</b></a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        }
+
+
+    }
+    else
+    {
+        <div>
+            <p class="no-comment">تاکنون دیدگاهی ثبت نشده است !</p>
+        </div>
+    }
+    <hr />
+    <h5>دیدگاه شما </h5>
+    <div id="write-comment">
+        <partial name="_AddReview" model="new ReviewViewModel()" />
+    </div>
+</div>
+
+<script>
+
+    function HideAnswers(reviewId) {
+        $('#collapseComments-'+reviewId).collapse('hide');
+    }
+    function ShowAnswers(reviewId) {
+        $('#collapseComments-'+reviewId).collapse('show');
+    }
+
+    function ReplyComment(parentId)
+    {
+        $("#ParentId").val(parentId);
+        document
+            .getElementById("write-comment")
+            .scrollIntoView({ behavior: "smooth" });
+    }
+
+</script>
+
+
+

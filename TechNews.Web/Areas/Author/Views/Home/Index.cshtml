@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "داشبورد نویسنده";
+}
+
+<h1 class="admin-title">پنل نویسنده</h1>
+
+<div class="row">
+
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning-gradient">
+            <div class="inner">
+                <h3>@ViewBag.NewReviews</h3>
+                <p>نظرات در انتظار تایید</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-comment-o"></i>
+            </div>
+            <a href="/Author/UnconfirmedReviews" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+
+    <div class="col-lg-6 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success-gradient">
+            <div class="inner">
+                <h3>@ViewBag.PostAuthorCount</h3>
+                <p>پست های منتشر شده به وسیله ی شما تا به این لحظه</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-edit"></i>
+            </div>
+            <a href="/Author/Post" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+
+</div>

@@ -1,0 +1,35 @@
+﻿@model TechNews.DataLayer.Entities.Tag
+
+@{
+    ViewData["Title"] = "تگ جدید";
+}
+
+<h1>تگ جدید</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ItemId" value="@ViewBag.ItemId" class="form-control" />
+            <div class="form-group">
+                <label asp-for="TagTitle" class="control-label"></label><span style="font-size: 14px;">&nbsp;( میتوانید تگ ها را با , از هم جدا کنید ! )</span>
+                <input asp-for="TagTitle" class="form-control" />
+                <span asp-validation-for="TagTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="ذخیره" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">بازگشت به لیست</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

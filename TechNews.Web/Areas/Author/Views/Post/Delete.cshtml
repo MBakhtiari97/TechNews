@@ -1,0 +1,56 @@
+﻿@using TechNews.Utility.DateConvertor
+@model TechNews.DataLayer.Entities.Item
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<h1>حذف پست</h1>
+
+<h3>از بابت پاک کردن این پست اطمینان دارید ؟</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ItemTitle)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShortDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemImage)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="/img/posts/@Model.ItemImage" class="img-thumbnail imgthumbnail"/>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LikeCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LikeCount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemAuthor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ItemAuthor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemSubmitDate)
+        </dt>
+        <dd class = "col-sm-10">
+            <span>@Model.ItemSubmitDate.ToShamsiDate()</span>
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="حذف" class="btn btn-outline-danger" /> |
+        <a asp-action="Index">بازگشت به لیست</a>
+    </form>
+</div>

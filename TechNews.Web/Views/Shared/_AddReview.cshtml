@@ -1,0 +1,33 @@
+﻿@model TechNews.Core.DTOs.ReviewViewModel
+<div></div>
+<form asp-action="AddReview" asp-controller="Review" id="formComment">
+    <div class="form-row">
+        <input type="hidden" asp-for="ItemId" value="@ViewBag.PostId"/>
+        <input type="hidden" asp-for="ParentId"/>
+        <div class="col-md-6">
+            <input asp-for="Username" type="text" class="form-control" placeholder="نام شما">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <input asp-for="EmailAddress" type="email" class="form-control" placeholder="ایمیل">
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <input asp-for="Title" type="text" class="form-control" placeholder="عنوان دیدگاه">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <textarea asp-for="Description" class="form-control" placeholder="دیدگاه شما ..."></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <div class="text-left">
+                <button class="btn btn-primary">ثبت دیدگاه</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

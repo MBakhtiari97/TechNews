@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TechNews.DataLayer.Entities.Category>
+
+@{
+    ViewData["Title"] = "دسته بندی";
+}
+
+<h1>دسته بندی ها</h1>
+
+<p>
+    <a class="btn create-post" asp-action="Create">دسته بندی جدید</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryTitle)
+            </td>
+            <td>
+                <a class="btn btn-sm btn-outline-warning" asp-action="Edit" asp-route-id="@item.CategoryId">ویرایش</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.CategoryId">جزئیات</a>&nbsp;|
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.CategoryId">حذف</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="col-md-12 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PageCount > 1)
+            {
+                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
+
+<!--Paging-->
+<form asp-action="Index" asp-controller="Category" id="change">
+    <input type="hidden" value="1" name="pageId" id="pageNo" />
+</form>
+
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

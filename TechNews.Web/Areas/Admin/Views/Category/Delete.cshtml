@@ -1,0 +1,31 @@
+﻿@model TechNews.DataLayer.Entities.Category
+
+@{
+    ViewData["Title"] = "حذف";
+}
+
+<h1>حذف دسته بندی</h1>
+
+<h3>از حذف این دسته بندی اطمینان دارید ؟</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryTitle)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="حذف" class="btn btn-outline-danger" /> |
+        <a asp-action="Index">بازگشت به لیست</a>
+    </form>
+</div>

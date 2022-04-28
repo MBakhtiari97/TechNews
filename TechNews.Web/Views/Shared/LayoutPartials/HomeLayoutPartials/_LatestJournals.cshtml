@@ -1,0 +1,24 @@
+﻿@using TechNews.DataLayer.Entities
+@using TechNews.Utility.DateConvertor
+@{
+    List<Item> posts = ViewBag.LatestJournals;
+}
+<div class="special-posts">
+    <span class="title">آخرین مقالات</span><br>
+    @foreach (var post in posts)
+    {
+        <div class="special-box">
+            <a href="/Post/@post.ItemId">
+                <figure>
+                    <img src="/img/posts/@post.ItemImage" alt="@post.ItemTitle">
+                    <figcaption class="txt">
+                        <h4>@post.ItemTitle</h4>
+                        <span><i class="fa fa-calendar-o"></i>&nbsp;@post.ItemSubmitDate.ToShamsiDate()</span>
+                        <span><i class="fa fa-comment-o"></i>&nbsp;@post.Reviews.Count</span>
+                    </figcaption>
+                    <figcaption class="link"><i class="fa fa-external-link"></i></figcaption>
+                </figure>
+            </a>
+        </div>
+    }
+</div>

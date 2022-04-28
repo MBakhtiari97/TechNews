@@ -1,0 +1,91 @@
+﻿@using TechNews.Utility.DateConvertor
+@model IEnumerable<TechNews.Core.DTOs.ShowPostInSearch>
+@{
+    ViewData["Title"] = "نتایج جستجو";
+}
+
+<div class="latest-posts">
+    <div class="container-fluid">
+        <div class="col-md-12">
+
+            @if (Model.Any())
+            {
+                <div class="blog-title-span">
+                    <span class="title">جستجو برای : "@ViewBag.PhrasedSearched"</span>
+                </div>
+                @foreach (var post in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="post-box">
+                            <a href="/Post/@post.ItemId">
+                                <figure>
+                                    <img src="/img/posts/@post.ImageTitle" alt="@post.ItemTitle">
+                                    <figcaption class="meta-fig">
+                                        <span><i class="fa fa-clock-o"></i>&nbsp;@post.PublishDate.ToShamsiDate()</span>&nbsp;
+                                        <span><i class="fa fa-comment-o"></i>&nbsp;@post.ReviewsCount</span>
+                                    </figcaption>
+                                </figure>
+                            </a><div class="text-p">
+                                <a href="/Post/@post.ItemId">
+                                    <h5 class="text-center"><strong>@post.ItemTitle</strong></h5>
+                                    <p>
+                                        @post.ShortDescription
+                                    </p>
+                                </a><div class="text-center">
+                                   <a class="btn btn-default" href="/Post/@post.ItemId">ادامه مطلب</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+                <div class="col-md-12 text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            @if (ViewBag.PageCount > 1)
+                            {
+                                @for (var i = 1; i <= ViewBag.PageCount; i++)
+                                {
+                                    <li class="page-item"><a class="page-link" onclick="changePageNo(@i)">@i</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+                <!--Paging-->
+                <form asp-action="SearchPage" id="change">
+                    <input type="hidden" value="1" name="pageId" id="pageNo"/>
+                    <input type="hidden" value="@ViewBag.PhrasedSearched" name="searchPhrase"/>
+                </form>
+            }
+            else
+            {
+                <div class="single_post">
+                    <div class="container-fluid">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="post_content not_found text-center">
+                                <span>404</span>
+                                <p>محتوای مورد نظر پیدا نشد !</p>
+                                <a class="btn backtomainpage" href="/">بازگشت به خانه</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<!--Change Page Required JS-->
+
+<script>
+    function changePageNo(pageId)
+    {
+        $("#pageNo").val(pageId);
+        $("#change").submit();
+    }
+</script>
+<!--EndPaging-->

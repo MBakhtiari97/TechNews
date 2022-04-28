@@ -1,0 +1,26 @@
+﻿@model TechNews.DataLayer.Entities.Tag
+
+@{
+    ViewData["Title"] = "حذف تگ";
+}
+
+<h1>حذف تگ</h1>
+
+<h3>آیا از حذف این تگ اطمینان دارید ؟</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TagTitle)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TagTitle)
+        </dd>
+
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="حذف" class="btn btn-outline-danger" /> |
+        <a asp-action="Index" asp-route-itemId="@Model.ItemId">بازگشت به لیست</a>
+    </form>
+</div>

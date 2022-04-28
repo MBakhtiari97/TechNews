@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Category>
+@using TechNews.DataLayer.Entities
+<div class="container-fluid">
+    <div class="col-md-10">
+        <div class="main-menu">
+            <ul>
+                @foreach (var category in Model)
+                {
+                    <li><a href="/Category/@category.CategoryId">@category.CategoryTitle</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="social-box">
+            <ul>
+                <li><a href="http://twitter.com/technews"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://facebook.com/technews"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://instagram.com/technews"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

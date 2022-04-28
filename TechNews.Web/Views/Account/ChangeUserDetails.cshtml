@@ -1,0 +1,50 @@
+﻿@using System.Security.Claims
+@model TechNews.DataLayer.Entities.User
+
+@{
+    ViewData["Title"] = "تغییر اطلاعات";
+}
+
+
+<div class="row forget-password">
+    <h1>تغییر اطلاعات حساب کاربری</h1>
+
+    <hr />
+    <div class="col-md-12">
+        <form asp-action="ChangeUserDetails" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="UserId" type="hidden" class="form-control"/>
+            <input asp-for="Password" type="hidden" class="form-control"/>
+            <input asp-for="IpAddress" type="hidden" class="form-control"/>
+
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control"/>
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control"/>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfilePhoto" class="control-label"></label>
+                <input type="file" asp-for="ProfilePhoto" class="form-control"/>
+                <span asp-validation-for="ProfilePhoto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">ثبت تغییرات</button>
+            </div>
+        </form>
+        <a class="btn btn-outline-info" href="/UserPanel?userId=@Model.UserId">بازگشت به پنل کاربری</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
